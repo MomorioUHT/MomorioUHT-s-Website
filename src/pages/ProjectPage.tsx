@@ -1,13 +1,12 @@
 import Layout from '../components/Layout';
-import geometry from "../assets/geometry2.gif";
+import geometry from "../assets/geometry3.gif";
 import { useEffect } from 'react';
-import TributeCard from '../components/TributeCard';
+import ProjectCard from '../components/ProjectCard';
 
+import image from '../assets/TAAlgo2025.png'
 //images
-import image1 from '../assets/TAAlgo2025.png';
-import image2 from '../assets/PythonTutor2024.png';
 
-function TributesPage() {
+function ProjectPage() {
     useEffect(() => {
         const reveals = document.querySelectorAll('.reveal');
 
@@ -64,36 +63,24 @@ function TributesPage() {
                     `}
             </style>
 
-            <h1 className="reveal mt-2 pixel-font">Tributes</h1>
-            <p className="lead reveal mt-1 pixel-font">A collection of memories.</p>
+            <h1 className="reveal mt-2 pixel-font">Projects</h1>
+            <p className="lead reveal mt-1 pixel-font">Things I do in my free time :D</p>
 
             <div className="d-flex justify-content-center mt-4">
-                <TributeCard
-                    image={image1}
-                    title="Data Structures & Algorithms (01418321) Teacher Assistant @ Kasetsart University"
+                <ProjectCard
+                    image={image}
+                    title="SiamMC Minecraft Server"
                     description={`
-                        Working as a Teacher Assistant for the Data Structures & Algorithms course at Kasetsart University.
-                        This role allowed me to deepen my understanding of fundamental computer science concepts
-                        while assisting with lab sessions, grading assignments, and many key responsibilities that enriched my experience.
+                        A minigame minecraft server (1.8 based)
+                        With custom plugins and features.
                     `}
-                    about="July 2025 - December 2025"
-                />
-            </div>
-
-            <div className="d-flex justify-content-center mt-4">
-                <TributeCard
-                    image={image2}
-                    title="Python Fundamentals Course Tutor for new freshies @ Kasetsart University"
-                    description={`
-                        Tutoring new freshmen in Python programming as part of the Python Fundamentals course at Kasetsart University.
-                        This experience enhanced my communication skills and reinforced my own knowledge of Python, 
-                        as I guided students through coding concepts and problem-solving techniques.
-                    `}
-                    about="Jun 2024"
+                    state='In Development'
+                    tech={['Java']}
+                    link="https://github.com/yourrepo"
                 />
             </div>
         </Layout>
     );
 }
 
-export default TributesPage;
+export default ProjectPage;

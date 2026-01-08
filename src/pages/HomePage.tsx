@@ -25,6 +25,8 @@ function HomePage() {
         <Layout>
             <style>
                     {`
+                        @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
                         body {
                             margin: 0;
                             min-height: 100vh;
@@ -38,16 +40,18 @@ function HomePage() {
                             transform: translateY(40px);
                             transition: all 0.6s ease;
                         }
-
                         .reveal.active {
                             opacity: 1;
                             transform: translateY(0);
                         }
+                        .pixel-font {
+                            font-family: "Silkscreen", sans-serif;
+                        }
                     `}
             </style>
 
-            <h1 className="reveal">Welcome to MomorioUHT's Website!</h1>
-            <p className="lead reveal">This is a self-hosted personal website.</p>
+            <h1 className="reveal pixel-font">Welcome to MomorioUHT's Website!</h1>
+            <p className="lead reveal pixel-font">This is a self-hosted personal website.</p>
 
         </Layout>
     );
