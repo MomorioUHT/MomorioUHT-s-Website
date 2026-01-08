@@ -1,5 +1,7 @@
+import { useState } from "react";
+
 type ProjectCardProps = {
-    image: string;
+    images: string[];
     title: string;
     description: string;
     state: string;
@@ -7,11 +9,27 @@ type ProjectCardProps = {
     link?: string;
 };
 
-function ProjectCard({ image, title, description, state, tech, link }: ProjectCardProps) {
+function ProjectCard({ images, title, description, state, tech, link }: ProjectCardProps) {
+    const [current, setCurrent] = useState(0);
+
+    const prevImage = () => {
+        setCurrent((prev) => (prev === 0 ? images.length - 1: prev - 1));
+    }
+
+    const nextImage = () => {
+        setCurrent((prev) => (prev === images.length - 1 ? 0: prev + 1));
+    }
+
     return (
         <>
             <style>
                 {`
+                    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+                    .custom-font {
+                        font-family: 'Montserrat', sans-serif;
+                    }
+
                     .project-card {
                         transition: transform 0.3s ease, box-shadow 0.3s ease;
                     }
@@ -32,14 +50,14 @@ function ProjectCard({ image, title, description, state, tech, link }: ProjectCa
                 `}
             </style>
 
-            <div className="card bg-dark text-white border-secondary project-card reveal">
+            <div className="card bg-transparent text-white border-secondary project-card reveal">
                 <div className="row g-0 align-items-center">
 
                     {/* Image */}
-                    <div className="col-md-4 text-center p-3">
-                        <div className="border border-secondary rounded p-2 bg-dark">
+                    <div className="col-md-12 text-center p-3">
+                        <div className="border border-secondary rounded p-2 bg-transparent position-relative">
                             <img
-                                src={image}
+                                src={images[current]}
                                 alt={title}
                                 style={{
                                     maxWidth: '100%',
@@ -47,22 +65,44 @@ function ProjectCard({ image, title, description, state, tech, link }: ProjectCa
                                     objectFit: 'contain'
                                 }}
                             />
+                            <div className="text-secondary small mt-1">
+                                {current + 1} / {images.length}
+                            </div>
+
+                            {/* Controls */}
+                            {images.length > 1 && (
+                                <>
+                                    <button
+                                        className="btn btn-sm btn-dark position-absolute top-50 start-0 translate-middle-y"
+                                        onClick={prevImage}
+                                    >
+                                        ‹
+                                    </button>
+
+                                    <button
+                                        className="btn btn-sm btn-dark position-absolute top-50 end-0 translate-middle-y"
+                                        onClick={nextImage}
+                                    >
+                                        ›
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </div>
 
                     {/* Content */}
-                    <div className="col-md-8">
+                    <div className="col-md-12">
                         <div className="card-body">
-                            <h5 className="card-title">{title}</h5>
+                            <h5 className="card-title custom-font">{title}</h5>
 
                             {/* State */}
                             <p className="card-text">
-                                <span className="badge bg-primary me-1 tech-badge">
+                                <span className="badge bg-primary me-1 tech-badge custom-font">
                                     {state}
                                 </span>
                             </p>
 
-                            <p className="card-text text-secondary" style={{ whiteSpace: 'pre-line' }}>
+                            <p className="card-text text-secondary custom-font" style={{ whiteSpace: 'pre-line' }}>
                                 {description}
                             </p>
 
@@ -72,7 +112,7 @@ function ProjectCard({ image, title, description, state, tech, link }: ProjectCa
                                     {tech.map((t, i) => (
                                         <span
                                             key={i}
-                                            className="badge bg-secondary me-1 tech-badge"
+                                            className="badge bg-secondary me-1 tech-badge custom-font" 
                                         >
                                             {t}
                                         </span>

@@ -3,8 +3,16 @@ import geometry from "../assets/geometry3.gif";
 import { useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
 
-import image from '../assets/TAAlgo2025.png'
-//images
+// Images
+import siammcimg1 from '../assets/projects/siammc/SiamMC-1.png'
+import siammcimg2 from '../assets/projects/siammc/SiamMC-2.png'
+import siammcimg3 from '../assets/projects/siammc/SiamMC-3.png'
+import siammcimg4 from '../assets/projects/siammc/SiamMC-4.png'
+import siammcimg5 from '../assets/projects/siammc/SiamMC-5.png'
+import siammcimg6 from '../assets/projects/siammc/SiamMC-6.png'
+
+import protoimg1 from '../assets/projects/protogen/Protogen-1.png'
+import protoimg2 from '../assets/projects/protogen/Protogen-2.jpg'
 
 function ProjectPage() {
     useEffect(() => {
@@ -63,20 +71,25 @@ function ProjectPage() {
                     `}
             </style>
 
-            <h1 className="reveal mt-2 pixel-font">Projects</h1>
+            <h1 className="reveal mt-2 pixel-font">Projects & Hobbies</h1>
             <p className="lead reveal mt-1 pixel-font">Things I do in my free time :D</p>
 
             <div className="d-flex justify-content-center mt-4">
                 <ProjectCard
-                    image={image}
+                    images={[siammcimg1, siammcimg2, siammcimg3, siammcimg4, siammcimg5, siammcimg6]}
                     title="SiamMC Minecraft Server"
-                    description={`
-                        A minigame minecraft server (1.8 based)
-                        With custom plugins and features.
-                    `}
+                    description={`A minigame minecraft server (1.8 based)
+                        With custom plugins and features.`}
                     state='In Development'
                     tech={['Java']}
-                    link="https://github.com/yourrepo"
+                />
+
+                <ProjectCard
+                    images={[protoimg1, protoimg2]}
+                    title="Protogen"
+                    description={`Being a Protogen & Eat RAM for DDR5 price increase.`}
+                    state='Repairing'
+                    tech={['C', 'Arduino']}
                 />
             </div>
         </Layout>

@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import TributeCard from '../components/TributeCard';
 
 //images
-import image1 from '../assets/TAAlgo2025.png';
-import image2 from '../assets/PythonTutor2024.png';
+import image1 from '../assets/tributes/taalgo2025/TAAlgo2025.png';
+import image2 from '../assets/tributes/python2024/PythonTutor2024.png';
 
 function TributesPage() {
     useEffect(() => {
@@ -71,11 +71,9 @@ function TributesPage() {
                 <TributeCard
                     image={image1}
                     title="Data Structures & Algorithms (01418321) Teacher Assistant @ Kasetsart University"
-                    description={`
-                        Working as a Teacher Assistant for the Data Structures & Algorithms course at Kasetsart University.
+                    description={`Working as a Teacher Assistant for the Data Structures & Algorithms course at Kasetsart University.
                         This role allowed me to deepen my understanding of fundamental computer science concepts
-                        while assisting with lab sessions, grading assignments, and many key responsibilities that enriched my experience.
-                    `}
+                        while assisting with lab sessions, grading assignments, and many key responsibilities that enriched my experience.`}
                     about="July 2025 - December 2025"
                 />
             </div>
@@ -84,11 +82,9 @@ function TributesPage() {
                 <TributeCard
                     image={image2}
                     title="Python Fundamentals Course Tutor for new freshies @ Kasetsart University"
-                    description={`
-                        Tutoring new freshmen in Python programming as part of the Python Fundamentals course at Kasetsart University.
+                    description={`Tutoring new freshmen in Python programming as part of the Python Fundamentals course at Kasetsart University.
                         This experience enhanced my communication skills and reinforced my own knowledge of Python, 
-                        as I guided students through coding concepts and problem-solving techniques.
-                    `}
+                        as I guided students through coding concepts and problem-solving techniques.`}
                     about="Jun 2024"
                 />
             </div>
