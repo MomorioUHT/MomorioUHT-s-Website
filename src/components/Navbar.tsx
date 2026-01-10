@@ -27,6 +27,11 @@ function Navbar() {
                             </NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink to="/fanarts" className="nav-link">
+                                Fanarts
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink to="/fursona" className="nav-link">
                                 Fursona
                             </NavLink>
