@@ -1,90 +1,51 @@
-import Layout from '../components/Layout';
-import geometry from '../assets/geometry.gif';
 import { GoogleLogin } from '@react-oauth/google';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+
+import api from '../components/api/axios-api';
 import FanartCard from '../components/FanartCard';
 
-function FanartsPage() {
-    const [user, setUser] = useState<any>(null);
+import Layout from '../components/Layout';
+import geometry from '../assets/geometry.gif';
 
-    const fanart = [
-        {
-            id: 1,
-            title: "Protogen Version 1",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        },
-        {
-            id: 2,
-            title: "Protogen Version 2",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        },
-        {
-            id: 3,
-            title: "Protogen Version 3",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        },
-        {
-            id: 4,
-            title: "Protogen Version 4",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        },
-        {
-            id: 5,
-            title: "Protogen Version 5",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        },
-        {
-            id: 6,
-            title: "Protogen Version 6",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        },
-        {
-            id: 7,
-            title: "Protogen Version 7",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        },
-        {
-            id: 8,
-            title: "Protogen Version 8",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        },
-        {
-            id: 9,
-            title: "Protogen Version 9",
-            artist: "Testing Artist",
-            uploader: "Testing Artist",
-            image: "https://i.pinimg.com/736x/60/bb/ed/60bbed799cc137612afa742cc64d2501.jpg",
-            creationDate: "2024-01-01"
-        }
-    ];
+import { Fanart, FanartApiResponse } from '../components/hook/hook';
+function FanartsPage() {
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState<any>(null);
+    const [fanart, setFanart] = useState<Fanart[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const handleLoginSuccess = (credentialResponse: any) => {
-        console.log(credentialResponse);
+        try {
+            const decoded = jwtDecode<any>(credentialResponse.credential);
+            console.log("Decoded user:", decoded);
+            navigate("/upload", { state: { user: decoded }});
+        } catch {
+            console.log("Login failed");
+            alert("Login failed. Please try again.");
+        }
     }
+
+    const fetchFanart = async () => {
+        setIsLoading(true);
+        try {
+            const response = await api.get<FanartApiResponse>('/api/posts', {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.data.success) {
+                return;
+            }
+            setFanart(response.data.data);
+        } catch (error: any) {
+            console.log(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
         const reveals = document.querySelectorAll('.reveal');
@@ -101,6 +62,8 @@ function FanartsPage() {
         );
 
         reveals.forEach(el => observer.observe(el));
+
+        fetchFanart();
     }, []);
 
     return (
@@ -154,27 +117,36 @@ function FanartsPage() {
                 />
             </div>
 
-            {/* Fanart Grid */}
-            <div className="w-100 mt-4"> 
-                <div className="row g-4 justify-content-center">
-                    {fanart.map((art) => (
-                        <div
-                            key={art.id}
-                            className="col-12 col-md-6 col-lg-4 d-flex justify-content-center reveal"
-                        >
-                            <div style={{ width: '100%', maxWidth: '350px' }}>
-                                <FanartCard
-                                    title={art.title}
-                                    artist={art.artist}
-                                    uploader={art.uploader}
-                                    image={art.image}
-                                    creationDate={art.creationDate}
-                                />
-                            </div>
-                        </div>
-                    ))}
+            {isLoading ? (
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border" role="status"></div>
                 </div>
-            </div>
+            ) : (
+                <div className="w-100 mt-4"> 
+                    {fanart.length === 0 ? (
+                        <p className="lead pixel-font">No fanarts found...</p>
+                    ) : (
+                        <div className="row g-4 justify-content-center">
+                            {fanart.map((art) => (
+                                <div
+                                    key={art.id}
+                                    className="col-12 col-md-6 col-lg-3 d-flex justify-content-center reveal"
+                                >
+                                    <div style={{ width: '100%', maxWidth: '350px' }}>
+                                        <FanartCard
+                                            title={art.title}
+                                            artist={art.artist}
+                                            uploader={art.uploader}
+                                            image={art.image_path}
+                                            creationDate={art.creation_date}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            )}
 
         </Layout>
     );
