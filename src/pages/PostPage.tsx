@@ -1,12 +1,11 @@
 import Layout from '../components/Layout';
 import moon1 from "../assets/moon1.gif";
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import React from 'react';
 
 import api from '../components/api/axios-api';
 import { Fanart, PostApiResponse } from '../components/hook/hook';
-import { post } from 'axios';
 
 function PostPage() {
     const postId = useParams<{ postId: string }>().postId;

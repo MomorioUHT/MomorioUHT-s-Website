@@ -7,6 +7,8 @@ interface FanartCardProps {
 }
 
 function FanartCard ({title, artist, uploader, image, creationDate}: FanartCardProps) {
+    const backendURL = process.env.REACT_APP_BACKEND_LOCATION || "undefined";
+
     return (
         <>
             <style>
@@ -36,7 +38,7 @@ function FanartCard ({title, artist, uploader, image, creationDate}: FanartCardP
                 <div className="p-1 d-flex justify-content-center">
                     <div className="border border-secondary rounded p-2 bg-primary">
                         <img
-                            src={image}
+                            src={backendURL + image}
                             alt={title}
                             style={{
                                 maxWidth: '100%',

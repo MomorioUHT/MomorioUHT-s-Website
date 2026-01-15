@@ -1,15 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './pages';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux';
+import { store } from './components/redux/store';
+
+import App from './pages';
+
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+	document.getElementById('root') as HTMLElement
 );
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+	<React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+	</React.StrictMode>
 );
 
 reportWebVitals();

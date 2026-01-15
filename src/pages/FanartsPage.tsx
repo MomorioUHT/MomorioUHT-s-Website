@@ -1,21 +1,23 @@
 import { GoogleLogin } from '@react-oauth/google';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
-import api from '../components/api/axios-api';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchFanarts } from '../components/redux/slice/fanartSlice';
+
 import FanartCard from '../components/FanartCard';
 
 import Layout from '../components/Layout';
 import geometry from '../assets/geometry.gif';
 
-import { Fanart, FanartApiResponse } from '../components/hook/hook';
+import { RootState, AppDispatch } from '../components/redux/store';
+
 function FanartsPage() {
     const navigate = useNavigate();
 
-    const [user, setUser] = useState<any>(null);
-    const [fanart, setFanart] = useState<Fanart[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const dispatch = useDispatch<AppDispatch>();
+    const {items, loading, error} = useSelector((state: RootState) => state.fanart);
 
     const handleLoginSuccess = (credentialResponse: any) => {
         try {
@@ -28,24 +30,9 @@ function FanartsPage() {
         }
     }
 
-    const fetchFanart = async () => {
-        setIsLoading(true);
-        try {
-            const response = await api.get<FanartApiResponse>('/api/posts', {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            if (!response.data.success) {
-                return;
-            }
-            setFanart(response.data.data);
-        } catch (error: any) {
-            console.log(error.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    useEffect(() => {
+        dispatch(fetchFanarts());
+    }, [dispatch]);
 
     useEffect(() => {
         const reveals = document.querySelectorAll('.reveal');
@@ -63,8 +50,8 @@ function FanartsPage() {
 
         reveals.forEach(el => observer.observe(el));
 
-        fetchFanart();
-    }, []);
+        return () => observer.disconnect();
+    }, [items]); // Item list change, using this useEffect function
 
     return (
         <Layout>
@@ -117,17 +104,22 @@ function FanartsPage() {
                 />
             </div>
 
-            {isLoading ? (
+            {loading ? (
                 <div className="d-flex justify-content-center">
                     <div className="spinner-border" role="status"></div>
-                </div>
+                </div>                
+            ) : error ? (
+                <div className="d-flex justify-content-center">
+                    <p className="lead pixel-font text-danger">Error: {error}</p>
+                </div>    
             ) : (
                 <div className="w-100 mt-4"> 
-                    {fanart.length === 0 ? (
+                    {items.length === 0 ? (
                         <p className="lead pixel-font">No fanarts found...</p>
                     ) : (
                         <div className="row g-4 justify-content-center">
-                            {fanart.map((art) => (
+                            <p className="lead pixel-font reveal">GALLERY</p>
+                            {items.map((art) => (
                                 <div
                                     key={art.id}
                                     className="col-12 col-md-6 col-lg-3 d-flex justify-content-center reveal"
