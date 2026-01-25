@@ -101,6 +101,14 @@ function ContactPage() {
 
             <div className="d-flex justify-content-center mt-4">
                 <ContactCard
+                    title="Riot ID"
+                    link="Ralsei Deltarune#meow"
+                    icon="🗡️"
+                />
+            </div>
+
+            <div className="d-flex justify-content-center mt-4">
+                <ContactCard
                     title="Work Email"
                     link="tontawan.janth@gmail.com"
                     icon="📩"
