@@ -9,6 +9,7 @@ import ProjectPage from "./pages/ProjectPage";
 import FanartsPage from "./pages/FanartsPage";
 import UploadPage from "./pages/UploadPage";
 import PostPage from "./pages/PostPage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
     const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || "undefined";
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/fanarts" element={<FanartsPage />}/>
                     <Route path="/upload" element={<UploadPage />}/>
                     <Route path="/post/:postId" element={<PostPage />}/>
+                    <Route path="/contact" element={<ContactPage />}/>
                 </Routes>
             </BrowserRouter>
         </GoogleOAuthProvider>
