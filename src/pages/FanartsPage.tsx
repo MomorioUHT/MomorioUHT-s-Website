@@ -118,7 +118,6 @@ function FanartsPage() {
                         <p className="lead pixel-font">No fanarts found...</p>
                     ) : (
                         <div className="row g-4 justify-content-center">
-                            <p className="lead pixel-font reveal">GALLERY</p>
                             {items.map((art) => (
                                 <div
                                     key={art.id}
@@ -131,6 +130,7 @@ function FanartsPage() {
                                             uploader={art.uploader}
                                             image={art.image_path}
                                             creationDate={art.creation_date}
+                                            id={art.id}
                                         />
                                     </div>
                                 </div>

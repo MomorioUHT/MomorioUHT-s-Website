@@ -6,6 +6,7 @@ import TributeCard from '../components/TributeCard';
 //images
 import image1 from '../assets/tributes/taalgo2025/TAAlgo2025.png';
 import image2 from '../assets/tributes/python2024/PythonTutor2024.png';
+import image3 from '../assets/tributes/jareejan26/Jaree2026.png'
 
 function TributesPage() {
     useEffect(() => {
@@ -66,6 +67,15 @@ function TributesPage() {
 
             <h1 className="reveal mt-2 pixel-font">Tributes</h1>
             <p className="lead reveal mt-1 pixel-font">A collection of memories.</p>
+
+            <div className="d-flex justify-content-center mt-4">
+                <TributeCard
+                    image={image3}
+                    title="First meet @ Jaree Cafe 2026"
+                    description={`Meeting the furries group and the protogens OwO, This place is nice tho`}
+                    about="25 Jan 2026"
+                />
+            </div>
 
             <div className="d-flex justify-content-center mt-4">
                 <TributeCard

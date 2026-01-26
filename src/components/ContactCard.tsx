@@ -42,7 +42,7 @@ function ContactCard({title, link, href, icon = "🔗"}: ContactCardProps) {
 
             <div
                 className="card h-100 bg-transparent text-white border-secondary contact-card reveal"
-                style={{ width: 'fit-content', maxWidth: '100%' }}
+                style={{ width: '300px', maxWidth: '100%' }}
             >
                 <div className="card-body">
                     <h5 className="card-title custom-font d-flex align-items-center gap-2">

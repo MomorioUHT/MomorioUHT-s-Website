@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import mainbg from "../assets/mainbg.gif";
+import mainbg from "../assets/mainbg2.gif";
 import { useEffect } from 'react';
 
 function HomePage() {

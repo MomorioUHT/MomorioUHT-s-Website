@@ -87,7 +87,8 @@ function ProjectPage() {
                 <ProjectCard
                     images={[protoimg1, protoimg2]}
                     title="Protogen"
-                    description={`Being a Protogen & Eat RAM for DDR5 price increase.`}
+                    description={`Being a Protogen & Eat RAM for DDR5 price increase.
+                        by the way, this is the blue old color for me`}
                     state='Repairing'
                     tech={['C', 'Arduino']}
                 />

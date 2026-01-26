@@ -20,7 +20,7 @@ function TributeCard({ image, title, description, about }: TributeCardProps) {
             
             <div className="card h-100 bg-transparent text-white border-secondary reveal"
                 style={{
-                    width: 'fit-content',
+                    width: '1000px',
                     maxWidth: '100%'
                 }}
             >

@@ -46,6 +46,14 @@ function UploadPage() {
             alert("Please fill all fields");
             return;
         }
+        if (title.length > 50 || title.length === 0) {
+            alert("Title text is 1-50 characters limit (English)");
+            return;
+        }
+        if (artist.length > 50 || artist.length === 0) {
+            alert("Artist name is 1-50 characters limit (English)");
+            return;
+        }
 
         try {
             setLoading(true);
@@ -56,7 +64,9 @@ function UploadPage() {
                 uploaderId: user.sub
             })).unwrap() // for catch error like try / catch
 
-            navigate(`/post/${res.id}`)
+            alert("Upload Complete! Your art is now displayed in the fanarts hall!")
+
+            navigate('/fanarts')
         } catch (error: any) {
             alert("Upload failed! " + error)
         } finally {
@@ -69,6 +79,7 @@ function UploadPage() {
             <style>
                 {`
                     @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+                    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
                     body {
                         margin: 0;
@@ -99,6 +110,9 @@ function UploadPage() {
 
                     .pixel-font {
                         font-family: "Silkscreen", sans-serif;
+                    }
+                    .custom-font {
+                        font-family: 'Montserrat', sans-serif;
                     }
 
                     .upload-card {
@@ -148,7 +162,7 @@ function UploadPage() {
 
                     .preview {
                         width: 100%;
-                        height: 260px;
+                        height: 100%;
                         border: 1px dashed #555;
                         border-radius: 8px;
                         margin-bottom: 16px;
@@ -175,7 +189,7 @@ function UploadPage() {
                     you can now upload the fanart
                 </p>
 
-                <div className="upload-card reveal pixel-font mt-4">
+                <div className="upload-card reveal custom-font mt-4">
                     <div className="mb-3 text-center">
                         <strong>Welcome, {user.name}</strong>
                     </div>
@@ -183,7 +197,7 @@ function UploadPage() {
                     {/* Preview */}
                     <div className="preview">
                         {image ? (
-                            <img src={URL.createObjectURL(image)} alt="Preview" />
+                            <img src={URL.createObjectURL(image)} alt="Preview"/>
                         ) : (
                             <span>No image selected</span>
                         )}

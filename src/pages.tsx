@@ -8,7 +8,6 @@ import TributesPage from "./pages/TributesPage";
 import ProjectPage from "./pages/ProjectPage";
 import FanartsPage from "./pages/FanartsPage";
 import UploadPage from "./pages/UploadPage";
-import PostPage from "./pages/PostPage";
 import ContactPage from "./pages/ContactPage";
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
                     <Route path="/projects" element={<ProjectPage />}/>
                     <Route path="/fanarts" element={<FanartsPage />}/>
                     <Route path="/upload" element={<UploadPage />}/>
-                    <Route path="/post/:postId" element={<PostPage />}/>
                     <Route path="/contact" element={<ContactPage />}/>
                 </Routes>
             </BrowserRouter>
