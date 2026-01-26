@@ -57,7 +57,7 @@ function UploadPage() {
 
         try {
             setLoading(true);
-            const res = await dispatch(uploadFanart({
+            await dispatch(uploadFanart({
                 title,
                 artist,
                 image,

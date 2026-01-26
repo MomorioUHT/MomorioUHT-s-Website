@@ -32,6 +32,11 @@ function Navbar() {
                             </NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink to="/stickers" className="nav-link">
+                                Stickers
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink to="/fursona" className="nav-link">
                                 Fursona
                             </NavLink>
