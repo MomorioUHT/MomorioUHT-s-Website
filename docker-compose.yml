@@ -2,8 +2,7 @@ services:
   momorio_webui:
     build: .
     container_name: momorio_webui
-    ports:
-    - 3000:3000
+    network_mode: "host"
     volumes:
     - .:/app
     - /app/node_modules
